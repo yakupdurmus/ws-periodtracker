@@ -1,13 +1,19 @@
-import express from 'express';
+import express from "express";
+import { getUser } from "./services/user";
 const app = express();
 const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World4!');
-});
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
-app.get('/test', (req, res) => {
-  res.send('yakup!asdasd');
+app.get("/user", (req, res) => {
+  getUser((result) => {
+    res.send(result);
+  });
 });
 
 app.listen(port, () => {
