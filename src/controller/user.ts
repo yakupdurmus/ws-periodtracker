@@ -1,5 +1,5 @@
-import * as Model from "../model";
-import app from "../app";
+import * as Model from "model";
+import app from "app";
 
 app.get("/", (req, res) => {
   res.send("Welcome home page");

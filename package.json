@@ -3,6 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/app.js",
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "src"
+    ],
+    "exec": "node -r tsconfig-paths/register -r ts-node/register ./index.ts",
+    "ext": "ts, js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && node dist/app.js",
@@ -27,6 +40,7 @@
     "knex": "^1.0.2",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.15",
-    "ts-node": "^10.4.0"
+    "ts-node": "^10.4.0",
+    "tsconfig-paths": "^3.12.0"
   }
 }
