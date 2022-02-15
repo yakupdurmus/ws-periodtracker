@@ -1,8 +1,6 @@
 -- -------------------------------------------------------------
--- Yakup Durmuş
---
 -- Database: periodtrackerdb
--- Generation Time: 2022-02-13 01:37:33.4130
+-- Generation Time: 2022-02-15 23:40:16.5680
 -- -------------------------------------------------------------
 
 
@@ -26,8 +24,8 @@ CREATE TABLE `log` (
 CREATE TABLE `note` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `content` text,
   `title` text,
+  `content` text,
   `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
@@ -53,14 +51,28 @@ CREATE TABLE `period_symptom` (
 
 CREATE TABLE `period_type` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `type` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE `period_type_translation` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `period_type_id` int DEFAULT NULL,
+  `language_code` text NOT NULL,
+  `type` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 
 CREATE TABLE `symptom` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `type` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `severity` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+
+CREATE TABLE `symptom_translation` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `symptom_id` int NOT NULL,
+  `language_code` text NOT NULL,
+  `type` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 
@@ -78,8 +90,8 @@ CREATE TABLE `user` (
 INSERT INTO `log` (`id`, `user_id`, `activity`) VALUES
 (1, 5, 'log test ediliyor');
 
-INSERT INTO `note` (`id`, `user_id`, `content`, `title`, `date`) VALUES
-(1, 4, 'test not', 'not title', '2022-02-13 01:34:40');
+INSERT INTO `note` (`id`, `user_id`, `title`, `content`, `date`) VALUES
+(1, 4, 'Test Titile', 'Test Not', '2022-02-15 23:37:54');
 
 INSERT INTO `period` (`id`, `user_id`, `period_type_id`, `start_date`, `end_date`, `cycle_lenght`, `predicted_start`) VALUES
 (1, 4, 1, NULL, NULL, 10, NULL);
@@ -87,16 +99,27 @@ INSERT INTO `period` (`id`, `user_id`, `period_type_id`, `start_date`, `end_date
 INSERT INTO `period_symptom` (`id`, `period_id`, `symptom_id`, `date`) VALUES
 (1, 1, 1, '2010-10-20 21:00:00');
 
-INSERT INTO `period_type` (`id`, `type`) VALUES
-(1, 'regil'),
-(2, 'hamile kalmak istiyorum'),
-(3, 'hamile');
+INSERT INTO `period_type` (`id`) VALUES
+(1),
+(2),
+(3);
 
-INSERT INTO `symptom` (`id`, `type`, `severity`) VALUES
-(1, 'Yorgunluk', '1'),
-(2, 'Göğüs ağrısı', '1'),
-(3, 'İshal', '2'),
-(4, 'Alt karın ağrısı', '2');
+INSERT INTO `period_type_translation` (`id`, `period_type_id`, `language_code`, `type`) VALUES
+(1, 1, 'tr', 'Regil'),
+(2, 2, 'tr', 'Hamile Kalmak İstiyorum'),
+(3, 3, 'tr', 'Hamile');
+
+INSERT INTO `symptom` (`id`, `severity`) VALUES
+(1, '1'),
+(2, '1'),
+(3, '2'),
+(4, '2');
+
+INSERT INTO `symptom_translation` (`id`, `symptom_id`, `language_code`, `type`) VALUES
+(1, 1, 'tr', 'Öksürük'),
+(2, 2, 'tr', 'Mide Bulantısı'),
+(3, 3, 'tr', 'Baş Dönmesi'),
+(4, 4, 'tr', 'Kızarıklık');
 
 INSERT INTO `user` (`id`, `name`, `user_name`, `password`, `active_period_type`, `date`, `is_active`) VALUES
 (4, 'Yakup', 'yakuppdurmus@gmail.com', '?Yakup5488', 1, '2022-02-13 01:05:06', 1),
