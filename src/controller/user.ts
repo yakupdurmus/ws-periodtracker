@@ -9,3 +9,9 @@ app.get("/user", (req, res) => {
     console.log("response", response);
   });
 });
+
+app.get("/stations", (req, res) => {
+  Model.User.getStations().then((response) => {
+    res.send(JSON.stringify(response));
+  });
+});
