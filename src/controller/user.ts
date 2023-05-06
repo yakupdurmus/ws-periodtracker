@@ -6,12 +6,6 @@ app.get("/", (req, res) => {
 });
 app.get("/user", (req, res) => {
   Model.User.getUser().then((response) => {
-    console.log("response", response);
-  });
-});
-
-app.get("/stations", (req, res) => {
-  Model.User.getStations().then((response) => {
     res.send(JSON.stringify(response));
   });
 });
