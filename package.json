@@ -22,7 +22,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "develop": "tsc && node dist/app.js",
-    "start": "node index.ts",
+    "start": "node -r tsconfig-paths/register -r ts-node/register ./index.ts index.ts",
     "live": "npx nodemon index.ts",
     "lint": "eslint . --ext .ts",
     "prepare": "husky install"

@@ -1,3 +1,3 @@
-require('./src/app');
-require('./src/services');
-require('./src/controller');
+import "./src/app";
+import "./src/services";
+import "./src/controller";
